@@ -1,3 +1,4 @@
+import pymysql
 from flask import Flask
 from flask import render_template
 
@@ -15,7 +16,13 @@ def home():
 
 @app.route("/movie")
 def movie():
-    return render_template('movie.html')
+    con=pymysql.Connection(host='localhost',user='root',password='mysql123',port=3306,charset='utf8',database="douban")
+    cursor=con.cursor()
+    cursor.execute("select * from movie;")
+    movie_data=cursor.fetchall()
+    cursor.close()
+    con.close()
+    return render_template('movie.html',movies=movie_data)
 
 @app.route("/team")
 def team():
@@ -30,4 +37,4 @@ def score():
     return render_template('score.html')
 
 if __name__ == '__main__':
-    app.run()
+    app.run(debug=True)
