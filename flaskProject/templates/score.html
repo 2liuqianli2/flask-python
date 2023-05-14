@@ -20,6 +20,10 @@
     <link rel="stylesheet" href="../static/css/templatemo-space-dynamic.css">
     <link rel="stylesheet" href="../static/css/animated.css">
     <link rel="stylesheet" href="../static/css/owl.css">
+    <script src="../static/js/echarts.min2.js"></script>
+
+  option && mychart.setOption(option);
+</script>
 
   </head>
 
@@ -71,7 +75,7 @@
   <!-- ***** Header Area End ***** -->
 
 
-    <div id="portfolio" class="our-portfolio section">
+  <div id="portfolio" class="our-portfolio section">
     <div class="container">
       <div class="row">
         <div class="col-lg-6 offset-lg-3">
@@ -83,6 +87,64 @@
       </div>
     </div>
   </div>
+
+
+  <div class="container">
+    <div id="main" style="with:100%;height: 350px;">
+      <script type="text/javascript">
+        var option;
+        var chartdom=document.getElementById('main');
+        var mychart =echarts.init(chartdom);
+        
+        var aa ={{ pingfen | tojson }}
+        var dd={{ num }}
+
+        option = {
+          color:['#3398DB'],
+          title:{
+            text:'',
+          },
+          tooltip:{
+            trigger:'axis',
+            axisPointer:{
+              type:'shadow',
+            }
+          },
+          grid:{
+            left:'3%',
+            right:'4%',
+            bottom:'3%',
+            containLabel: true,
+          },
+          yAxis: {
+              type: 'value'
+          },
+          xAxis: {
+              type: 'category',
+              data: aa
+          },
+
+          series: [{
+            barWidth:'65%',
+            type: 'bar',
+            data: dd
+          }],
+};
+  option && mychart.setOption(option);
+</script>
+    </div>
+
+  </div>
+
+
+
+
+
+
+
+
+
+
 
   <div class="main-banner wow fadeIn" id="top" data-wow-duration="1s" data-wow-delay="0.5s">
     <div class="container">

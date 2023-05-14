@@ -34,7 +34,20 @@ def word():
 
 @app.route("/score")
 def score():
-    return render_template('score.html')
+    scores=[]
+    nums=[]
+    con=pymysql.Connection(host="localhost",port=3306,password='mysql123',database='douban',user='root',charset='utf8')
+    cursor=con.cursor()
+    cursor.execute(" select pingfen, count(pingfen) from movie group by pingfen;")
+    datas=cursor.fetchall()
+    for i in datas:
+        scores.append(i[0])
+        nums.append(i[1])
+
+    cursor.close()
+    con.close()
+
+    return render_template('score.html',pingfen=scores,num=nums)
 
 if __name__ == '__main__':
     app.run(debug=True)
